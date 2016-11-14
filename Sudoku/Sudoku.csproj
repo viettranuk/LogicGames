@@ -42,8 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Solver.cs" />
-    <Compile Include="Sudoku.cs" />
+    <Compile Include="SudokuSolver.cs" />
+    <Compile Include="SudokuGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

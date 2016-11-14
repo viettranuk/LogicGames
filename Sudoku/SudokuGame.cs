@@ -8,37 +8,43 @@ namespace Sudoku
 {
     public class SudokuGame
     {
-        public static void Main(string[] args)
+        private static int[,] ReadInput()
         {
-            var simpleTest = new int[9, 9] {
+            var inputData = new int[9, 9];
+            var line = 0;
 
-                {0, 4, 0, 0, 0, 0, 1, 3, 2},
-                {0, 8, 3, 5, 1, 0, 0, 6, 0},
-                {7, 0, 0, 0, 3, 0, 4, 0, 0},
-                {0, 0, 4, 3, 9, 7, 0, 0, 0},
-                {0, 7, 0, 6, 0, 1, 0, 4, 0},
-                {0, 0, 0, 4, 2, 5, 3, 0, 0},
-                {0, 0, 2, 0, 5, 0, 0, 0, 4},
-                {0, 3, 0, 0, 6, 9, 5, 8, 0},
-                {1, 5, 6, 0, 0, 0, 0, 2, 0}
-            };
+            while (line < 9)
+            {
+                var row = Console.ReadLine();
 
-            var evilTest = new int[9, 9] {
+                if (!string.IsNullOrWhiteSpace(row))
+                {
+                    var rowArray = row.Split(new char[]{','}, StringSplitOptions.RemoveEmptyEntries);
 
-                {7, 8, 2, 3, 0, 0, 0, 0, 0},
-                {0, 0, 9, 0, 0, 4, 0, 0, 0},
-                {3, 0, 6, 0, 0, 9, 0, 0, 0},
-                {0, 0, 8, 0, 1, 0, 0, 0, 6},
-                {6, 0, 0, 0, 0, 0, 0, 0, 5},
-                {2, 0, 0, 0, 4, 0, 1, 0, 0},
-                {0, 0, 0, 7, 0, 0, 6, 0, 2},
-                {0, 0, 0, 9, 0, 0, 8, 0, 0},
-                {0, 0, 0, 0, 0, 1, 7, 3, 9}
-            };
+                    if (rowArray.Length == 9)
+                    {
+                        for (int col = 0; col < 9; col++)
+                        {
+                            inputData[line, col] = Convert.ToInt32(rowArray[col]);
+                        }
 
-            var suSol = new SudokuSolver { SudokuBoard = evilTest };
+                        line++;
+                    }
+                }
+            }
 
-            suSol.Solve(0, 0);
+            return inputData;
+        }
+        
+        public static void Main()
+        {
+            var testBoard = ReadInput();
+
+            Console.WriteLine();
+
+            var suSol = new SudokuSolver { SudokuBoard = testBoard };
+
+            suSol.Solve();
 
             if (suSol.SudokuBoard != null)
             {

@@ -14,11 +14,11 @@ namespace Sudoku
         
         public int[,] SudokuBoard { get; set; }
 
-        private bool ValidInRow(int row, int value)
+        private bool ValidInRow(int row, int val)
         {
             for (int col = 0; col < 9; col++)
             {
-                if (SudokuBoard[row, col] == value)
+                if (SudokuBoard[row, col] == val)
                 {
                     return false;
                 }
@@ -27,11 +27,11 @@ namespace Sudoku
             return true;
         }
 
-        private bool ValidInCol(int col, int value)
+        private bool ValidInCol(int col, int val)
         {
             for (int row = 0; row < 9; row++)
             {
-                if (SudokuBoard[row, col] == value)
+                if (SudokuBoard[row, col] == val)
                 {
                     return false;
                 }
@@ -40,7 +40,7 @@ namespace Sudoku
             return true;
         }
 
-        private bool ValidInBlock(int row, int col, int value)
+        private bool ValidInBlock(int row, int col, int val)
         {
             row = (row / 3) * 3;
             col = (col / 3) * 3;
@@ -49,7 +49,7 @@ namespace Sudoku
             {
                 for (int c = 0; c < 3; c++)
                 {
-                    if (SudokuBoard[row + r, col + c] == value)
+                    if (SudokuBoard[row + r, col + c] == val)
                     {
                         return false;
                     }
@@ -57,10 +57,15 @@ namespace Sudoku
             }
 
             return true;
-        }
+        }        
 
-        public void Solve(int row, int col)
+        private void Solve(int row, int col)
         {
+            if (SudokuBoard == null)
+            {
+                return;
+            }
+            
             if (row > 8)
             {
                 solutionFound = true;
@@ -108,6 +113,11 @@ namespace Sudoku
                     SudokuBoard[row, col] = 0;
                 }
             }
+        }
+
+        public void Solve()
+        {
+            Solve(0, 0);
         }
     }
 }
