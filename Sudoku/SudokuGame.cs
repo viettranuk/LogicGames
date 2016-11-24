@@ -10,7 +10,7 @@ namespace Sudoku
     {
         private static int[,] ReadInput()
         {
-            var inputData = new int[9, 9];
+            var inputData = new int[9,9];
             var line = 0;
 
             while (line < 9)
